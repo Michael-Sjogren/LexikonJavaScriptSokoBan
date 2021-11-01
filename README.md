@@ -17,16 +17,16 @@ without the normal behavior of the arrow keys (i.e. scrolling in the web page).
 - Create a grid of html elements to build the tile-based map
 - A grid of html elements representing a tile-based game board
 - A player object that can move between the tiles of the board.
--- 1. Walls should stop the player
+  - 1. Walls should stop the player
 - Movable blocks that can be pushed by the player into empty spaces.
--- 1. The game should end once all blocks have been pushed into the right spaces on
+  - 1. The game should end once all blocks have been pushed into the right spaces on
 the game board.
 - You are NOT allowed to use Canvas.
 ### Code Requirements:
 - You must use event listeners to handle key presses to make the player move.
--- 1. The key press event listener should be able to handle the up, down, left and right
+  - 1. The key press event listener should be able to handle the up, down, left and right
 arrow keys
--- 2. The normal effect of those keys should be suppressed, to make sure that the
+ - 2. The normal effect of those keys should be suppressed, to make sure that the
 - page does not scroll when you press them.
 - The grid map must be made up of html elements created through JavaScript commands.
--- 1. The player and blocks should be represented by html elements.
+  - 1. The player and blocks should be represented by html elements.
