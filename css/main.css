@@ -1,0 +1,27 @@
+* {
+   padding: 0;
+   margin: 0;
+   list-style: none;
+}
+
+body {
+    font-family: Helvetica, sans-serif;
+    font-size: 18px;
+    margin: 0 auto;
+    max-width: 1920px;
+    min-height: 480px;
+    text-align: center;
+}
+main {
+    min-height: 100%;
+    padding: 2rem;
+}
+
+.tile
+{
+    max-width: 64px;
+    max-height: 64px;
+    background-color: rgb(224, 224, 224);
+    display: block;
+}
+
