@@ -137,7 +137,6 @@ document.addEventListener('keydown', (event) => {
             }
         }
         const prevId = tileMap.getCellIdFromWorldPos(player.position);
-        console.log(prevId);
         if (playerCanMove)
         {
             if (goals.includes(prevId)) {
