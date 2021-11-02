@@ -1,27 +1,47 @@
 * {
-   padding: 0;
-   margin: 0;
-   list-style: none;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    list-style: none;
 }
 
 body {
     font-family: Helvetica, sans-serif;
     font-size: 18px;
     margin: 0 auto;
-    max-width: 1920px;
-    min-height: 480px;
     text-align: center;
 }
-main {
-    min-height: 100%;
-    padding: 2rem;
+
+#game
+{
+    padding: 0;
+    margin: 0;
+    border: 1px solid black;
+}
+.tile.block
+{
+    border: 1px solid gray;
+    background-color: rgb(218, 233, 7);
 }
 
+.tile.goal
+{
+    border-radius: 50%;
+    background-color: green;
+}
+.tile.wall
+{
+    background-color: black;
+}
+.tile.player
+{
+    background-color: blue;
+    border-radius: 50%;
+}
 .tile
 {
-    max-width: 64px;
-    max-height: 64px;
-    background-color: rgb(224, 224, 224);
-    display: block;
+    padding: 0;
+    margin: 0;
+    display: inline-block;
 }
 
