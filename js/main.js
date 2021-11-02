@@ -4,7 +4,6 @@ import Vector2 from './classes/vector2.js';
 
 import * as SokobanData from './sokoban-data.js';
 
-// the size of each tile; width and height.
 const gameContainer = document.getElementById("game");
 const tileSize = new Vector2(32, 32);
 
@@ -23,11 +22,11 @@ let resetGame = () => {
 }
 
 let isGameWon = () => {
+    // if all movable blocks exist in goals you win
     return tileMap.getBlocks().every(e => tileMap.getGoals().includes(e.cellId));
 }
 
-
-
+// main game event loop
 document.addEventListener('keydown', (event) => {
     event.preventDefault();
     gameContainer.focus();
@@ -63,38 +62,49 @@ document.addEventListener('keydown', (event) => {
 
     // check if player can move to desired position
     if (!tileMap.isTileWalkable(newPlayerPos)) return;
-    let playerCanMove = true;
+
+
     // check if the desired position for player is a movable block
-    if (tileMap.isTileBlock(newPlayerPos)) {
+    const isABlock = tileMap.isTileBlock(newPlayerPos);
+    if (isABlock) {
         const cellId = tileMap.getCellIdFromWorldPos(newPlayerPos);
         const block = blocks.find(e => e.cellId === cellId);
         const newBlockPos = new Vector2(block.position.x + tileSize.x * moveDir.x, block.position.y + tileSize.y * moveDir.y)
-        if (!tileMap.isTileBlock(newBlockPos) && !tileMap.isTileWall(newBlockPos)) {
+        // check if this movable block can be pushed in the desired direction
+        const canPush = !tileMap.isTileBlock(newBlockPos) && !tileMap.isTileWall(newBlockPos);
+        if (canPush) {
 
             tileMap.setTileType(block.position, SokobanData.TileTypes.player);
             block.moveTo(newBlockPos);
             tileMap.setTileType(block.position, SokobanData.TileTypes.block);
             block.cellId = tileMap.getCellIdFromWorldPos(block.position);
         }
-        else {
-            playerCanMove = false;
+        else 
+        {
+            // if you cant push the block infornt of you you wont be able to move
+            return;
         }
-    }
-    const prevId = tileMap.getCellIdFromWorldPos(player.position);
-    if (playerCanMove) {
-        if (goals.includes(prevId)) {
-            tileMap.setTileType(player.position, SokobanData.TileTypes.goal);
-        }
-        else {
-            tileMap.setTileType(player.position, SokobanData.TileTypes.empty);
-        }
-        player.moveTo(newPlayerPos);
-        const cellId = tileMap.getCellIdFromWorldPos(player.position);
-        tileMap.setTileType(player.position, SokobanData.TileTypes.player);
-        player.cellId = cellId;
     }
 
+    const prevId = tileMap.getCellIdFromWorldPos(player.position);
+    // this resets the tileType to goal if the player has walked over a goal tile on the players previous move
+    if (goals.includes(prevId)) {
+        tileMap.setTileType(player.position, SokobanData.TileTypes.goal);
+    }
+    // if not a goal tile reset to empty tile
+    else {
+        tileMap.setTileType(player.position, SokobanData.TileTypes.empty);
+    }
+
+    player.moveTo(newPlayerPos);
+    const cellId = tileMap.getCellIdFromWorldPos(player.position);
+    tileMap.setTileType(player.position, SokobanData.TileTypes.player);
+    player.cellId = cellId;
+    // re-rendering map only when player has moved
     tileMap.renderMap();
+
+
+    // check win condition
     if (isGameWon()) {
         alert("Congratulations you win!");
         resetGame();

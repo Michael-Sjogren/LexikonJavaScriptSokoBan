@@ -116,9 +116,7 @@ export default class TileMap
     {
         const cellId = this.getCellIdFromWorldPos(worldPos);
         if (!this.isCellIdValid(cellId)) return false;
-        const isWall = this.isTileWall(worldPos);
-        //const isBlock = this.tiles[cellId].tileType === TileTypes.empty;
-        return !isWall;
+        return !this.isTileWall(worldPos);
     }
 
     isTileBlock = (wordPos) => 
