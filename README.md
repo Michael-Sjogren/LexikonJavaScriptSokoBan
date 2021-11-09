@@ -1,6 +1,9 @@
 # LexikonJavaScriptSokoban
 An assigment for my education as a .NET developer
 
+## Requierments to run
+You need to have a web server to run the game.
+
 ## Assignment Description
 
 You are going to create a simple JavaScript game, based on the game called ”Sokoban”.
